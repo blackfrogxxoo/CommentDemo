@@ -15,6 +15,7 @@ import me.wxc.commentdemo.logic.impl.ExpandReducer
 import me.wxc.commentdemo.logic.impl.FoldReducer
 import me.wxc.commentdemo.logic.impl.LoadLv1Reducer
 import me.wxc.commentdemo.logic.impl.ReplyReducer
+import me.wxc.commentdemo.logic.impl.StartExpandReducer
 import me.wxc.commentdemo.logic.impl.StartLoadLv1Reducer
 
 class CommentAdapter(private val reduceBlock: Reducer.() -> Unit) :
@@ -130,6 +131,7 @@ class FoldingVH(itemView: View, reduceBlock: Reducer.() -> Unit) : VH(itemView, 
         expand.visibility =
             if (folding.state == CommentItem.Folding.State.LOADED_ALL) GONE else VISIBLE
         expand.setOnClickListener {
+            reduceBlock.invoke(StartExpandReducer(folding))
             reduceBlock.invoke(ExpandReducer(folding))
         }
         fold.visibility = if (folding.page == 1) GONE else VISIBLE
