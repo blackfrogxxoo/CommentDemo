@@ -14,7 +14,7 @@ object FakeApi {
             val id = id++
             CommentLevel1(
                 id = id,
-                content = "我是一级评论${id / 3}",
+                content = "我是一级评论${id}",
                 userId = 1,
                 userName = "一级评论员",
                 level2Count = 20

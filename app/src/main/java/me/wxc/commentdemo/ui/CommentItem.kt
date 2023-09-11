@@ -49,10 +49,13 @@ sealed interface CommentItem {
         override val id: Int
             get() = hashCode()
         override val content: CharSequence
-            get() = when  {
-                page <= 1 -> "展开20条回复"
-                page >= 5 -> ""
-                else -> "展开更多"
+            get() = if (state == State.LOADING) {
+                "加载中..."
+            } else {
+                when {
+                    page <= 1 -> "展开20条回复"
+                    else -> "展开更多"
+                }
             }
         override val userId: Int = 0
         override val userName: CharSequence = ""
